@@ -82,6 +82,7 @@ try {
         <h2>Register</h2>
 
         <!-- formulier voor het registreren van de user -->
+        <div class="form-register">
         <form action="register.php" method="POST">
 
             <label for="username">username:</label>
@@ -93,6 +94,7 @@ try {
             <button type="submit">Register</button>
 
         </form>
+        </div>
 
     </div>
 

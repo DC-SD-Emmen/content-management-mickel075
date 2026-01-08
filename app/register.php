@@ -1,6 +1,5 @@
-
-
 <?php
+require 'database.php';
 
 $host = "mysql"; // de hostnaam van de database server
 $user = "root"; // de gebruikersnaam voor de database
@@ -23,19 +22,25 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-    // $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-    $stmt->execute(['username' => $username, 'password' => $hashedPassword]);
 
-    if ($stmt) {
-        echo "Registration successful!";
+    // 1. Invoer sanitizen (Schoonmaken van de gebruikersnaam)
+    $username = htmlspecialchars(trim($_POST['username']));
+    $password = $_POST['password'];
+
+    // 2. Wachtwoord hashen
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // 3. Gegevens opslaan met Prepared Statements
+    $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+    
+    if ($stmt->execute(['username' => $username, 'password' => $hashedPassword])) {
+        // 4. Succesvol? Redirect naar index.php met een melding in de URL
+        header("Location: index.php?registration=success");
+        exit();
     } else {
         echo "Registration failed.";
     }
-    
+
 } 
 
 ?>

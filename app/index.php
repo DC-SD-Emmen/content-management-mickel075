@@ -39,63 +39,27 @@ Voeg een knop of link toe aan de beveiligde pagina om gebruikers uit te loggen.
 Implementeer PHP-code om de sessie te beëindigen en de gebruiker terug te sturen naar de inlogpagina. -->
 
 <?php
-
-$host = "mysql"; // de hostnaam van de database server
-$user = "root"; // de gebruikersnaam voor de database
-$pass = "root"; // het wachtwoord voor de database
-$dbname = "database"; // de naam van de database
-$charset = "utf8"; // de tekencodering
-$port = "3306"; // de poortnummer
-
-$dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
-// password_hash(#[\SensitiveParameter] string $password, string|int|null $algo, array $options = []): string
-
+require 'database.php'; // Alleen de database, NIET login.php
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrationpage</title>
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-    <!-- div container -->
     <div class="container"> 
-
         <h2>Register</h2>
-
-        <!-- formulier voor het registreren van de user -->
-        <div class="form-register">
         <form action="register.php" method="POST">
-
-            <label for="username">username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">password:</label>
-            <input type="password" id="password" name="password" required>
-
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
-
         </form>
-        </div>
-
+        <p>Al een account? <a href="login.php">Log hier in</a></p>
     </div>
 
 </body>

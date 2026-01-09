@@ -59,7 +59,7 @@ require 'database.php'; // Alleen de database, NIET login.php
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
         </form>
-        <p>Al een account? <a href="login.php">Log hier in</a></p>
+        <p>Al een account? <a href="inlog_pagina.php">Log hier in</a></p>
     </div>
 
 </body>

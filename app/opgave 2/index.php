@@ -19,10 +19,10 @@ Voer query's uit om alle games op te halen die aan een specifieke gebruiker zijn
 <?php
 
 // Database verbinding maken
-$host = 'localhost';
-$db = 'user_games';
+$host = 'mysql';
+$db = 'database';
 $user = 'root';
-$pass = '';
+$pass = 'root';
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
 try {

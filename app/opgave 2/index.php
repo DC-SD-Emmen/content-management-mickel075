@@ -91,6 +91,15 @@ try {
     echo "Fout bij verbinden: " . $e->getMessage();
 }
 
+// Voorbeeld gebruiker ophalen voor weergave
+$userStmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+$userStmt->execute([':id' => $userId]);
+$user = $userStmt->fetch(PDO::FETCH_ASSOC);
+
+// Sluit de databaseverbinding
+$pdo = null;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +111,12 @@ try {
 </head>
 <body>
 
-    <table></table>
+    <!-- button voor het toevoegen van de gamename en username -->
+    <button onclick="location.href='add_game_user.php'">Add Game and User</button>
+    <h2>Games for User: <?= htmlspecialchars($user['name']) ?></h2>
+    
+
+    <table>
         <tr>
             <th>Game Name</th>
             <th>User Name</th>

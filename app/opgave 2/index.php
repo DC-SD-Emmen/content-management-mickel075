@@ -42,7 +42,7 @@ try {
     $pdo->exec($createTableSQL);
 
     // Toon resultaten (optioneel, om te testen)
-    echo "Verbinding geslaagd en tabel bijgewerkt!";
+    // echo "Verbinding geslaagd en tabel bijgewerkt!";
 
     // Koppeltabel vulling
     $insertSQL = "INSERT INTO user_games (user_id, game_id) VALUES (:user_id, :game_id)";
@@ -109,25 +109,41 @@ $pdo = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body>    
 
-    <!-- button voor het toevoegen van de gamename en username -->
-    <button onclick="location.href='add_game_user.php'">Add Game and User</button>
-    <h2>Games for User: <?= htmlspecialchars($user['name']) ?></h2>
-    
+    <?php if (isset($user) && $user): ?>
+    <h2>Games for User: <?= htmlspecialchars($user['username']) ?></h2>    
 
     <table>
+
         <tr>
+
             <th>Game Name</th>
             <th>User Name</th>
+
         </tr>
+
         <?php foreach ($gamesForUser as $game): ?>
+
             <tr>
-                <td><?= htmlspecialchars($game['name']) ?></td>
-                <td><?= htmlspecialchars($user['name']) ?></td>
+
+                <td><?= htmlspecialchars($game['title']) ?></td>
+                <td><?= htmlspecialchars($user['username']) ?></td>
+
             </tr>
+
         <?php endforeach; ?>
+
     </table>
+
+     <!-- button voor het toevoegen van de gamename en username -->
+    <button onclick="location.href='add_game_user.php'">Add Game and User</button>
+
+    <?php else: ?>
+
+        <h2>Gebruiker niet gevonden. Controleer of er een gebruiker met ID 1 in de tabel 'users' staat.</h2>
+
+    <?php endif; ?>
 
 </body>
 </html>

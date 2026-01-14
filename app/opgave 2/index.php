@@ -112,7 +112,6 @@ $pdo = null;
 <body>    
 
     <?php if (isset($user) && $user): ?>
-    <h2>Games for User: <?= htmlspecialchars($user['username']) ?></h2>    
 
     <table>
 

@@ -1,7 +1,7 @@
 <!-- Formulier voor het toevoegen van een game en gebruiker -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $host = 'localhost';
+    $host = 'mysql';
     $db = 'database';
     $user = 'root';
     $pass = 'root';

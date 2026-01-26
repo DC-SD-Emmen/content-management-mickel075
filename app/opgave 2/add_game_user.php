@@ -40,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Fout bij verbinden met database: " . $e->getMessage();
     }
 
+    if ($user && $game) {
+        // Redirect naar index.php na succesvolle toevoeging
+        header("Location: index.php");
+    }
+
     // Sluit de databaseverbinding
     $pdo = null;
     exit;;

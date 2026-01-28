@@ -1,5 +1,5 @@
+<!-- Formulier voor het toevoegen van een game en gebruiker -->
 <?php
-// Formulier voor het toevoegen van een game en gebruiker
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $host = 'mysql';
     $db = 'database';
@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':game_id' => $game['id']
             ]);
             echo "Koppeling succesvol toegevoegd!";
-            // Redirect naar index.php na succesvolle toevoeging
-            header("Location: index.php");
-            exit;
         } else {
             echo "Gebruiker of game niet gevonden.";
         }
@@ -43,8 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Fout bij verbinden met database: " . $e->getMessage();
     }
 
+    // if ($user && $game) {
+    //     // Redirect naar index.php na succesvolle toevoeging
+    //     header("Location: index.php");
+    // }
+
     // Sluit de databaseverbinding
     $pdo = null;
+    exit;;
 }
 
 ?>

@@ -1,5 +1,7 @@
-<!-- Formulier voor het toevoegen van een game en gebruiker -->
 <?php
+//Formulier voor het toevoegen van een game en gebruiker
+ob_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $host = 'mysql';
     $db = 'database';
@@ -40,10 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Fout bij verbinden met database: " . $e->getMessage();
     }
 
-    // if ($user && $game) {
-    //     // Redirect naar index.php na succesvolle toevoeging
-    //     header("Location: index.php");
-    // }
+    if ($user && $game) {
+        // Redirect naar index.php na succesvolle toevoeging
+        header("Location: index.php");
+        exit;
+    }
 
     // Sluit de databaseverbinding
     $pdo = null;
@@ -57,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>add game and user</title>
 </head>
 <body>
 

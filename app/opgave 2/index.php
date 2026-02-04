@@ -105,9 +105,12 @@ $pdo = null;
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>    
 
@@ -134,6 +137,9 @@ $pdo = null;
         <?php endforeach; ?>
 
     </table>
+
+    <!-- button voor het verwijderen van een game voor een gebruiker die verwijst naar del_game_user.php -->
+    <button onclick="location.href='del_game_user.php'">Delete Game for User</button>
 
      <!-- button voor het toevoegen van de gamename en username -->
     <button onclick="location.href='add_game_user.php'">Add Game and User</button>

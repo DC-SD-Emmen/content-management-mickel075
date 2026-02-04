@@ -36,6 +36,8 @@
                     ':game_id' => $game['id']
                 ]);
                 echo "Koppeling succesvol verwijderd!";
+                // Optioneel: Redirect naar index.php na verwijdering met een delay van 2 seconden
+                header("Refresh:2; url=index.php");
             } else {
                 echo "Gebruiker of game niet gevonden.";
             }
@@ -49,9 +51,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>delete game and user</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -59,8 +64,10 @@
         <label for="username">Gebruikersnaam:</label>
         <input type="text" id="username" name="username" required>
         <br>
+        <br>
         <label for="gamename">Gamenaam:</label>
         <input type="text" id="gamename" name="gamename" required>
+        <br>
         <br>
         <input type="submit" value="Verwijder koppeling">
     

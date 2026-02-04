@@ -55,7 +55,14 @@
 </head>
 <body>
 
-    
+    <form method="POST" action="">
+        <label for="username">Gebruikersnaam:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="gamename">Gamenaam:</label>
+        <input type="text" id="gamename" name="gamename" required>
+        <br>
+        <input type="submit" value="Verwijder koppeling">
     
 </body>
 </html>

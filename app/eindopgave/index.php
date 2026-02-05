@@ -27,14 +27,36 @@
 <body>
 
     <div class="container">
+
+        <div class="top-right">
+
+            <div class="button-register">
+
+                <!-- Register and Login buttons -->
+                <button type="button" onclick="location.href='register.php'">Register</button>
+
+            </div>
+
+            <br>
+                
+            <div class="button-login">
+
+                <button type="button" onclick="location.href='login.php'">Login</button>
+
+            </div>
+
+        </div>
         
         <div class="header">
-        <h1>Game Library</h1>
-        <button type="button" onclick="location.href='add_game.php'">Add new game</button>
+
+            <h1>Game Library</h1>
+            <button type="button" onclick="location.href='add_game.php'">Add new game</button>
+
         </div>
 
         <!-- Nieuwe wrapper voor je grid -->
         <div class="library">
+
             <!-- Hier komen je cards -->
             <?php foreach ($games as $game): ?>
 

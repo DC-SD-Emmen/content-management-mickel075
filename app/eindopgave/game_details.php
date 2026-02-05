@@ -26,17 +26,17 @@
     if (
         $_SERVER['REQUEST_METHOD'] === 'POST' &&
         isset($_POST['action']) && $_POST['action'] === 'update' &&
-        isset($_POST['title'], $_POST['genre'], $_POST['platform'], $_POST['release_year'], $_POST['rating'], $_POST['beschrijving'], $_POST['id']) &&
+        isset($_POST['title'], $_POST['genre'], $_POST['platform'], $_POST['release_year'], $_POST['rating'], $_POST['description   '], $_POST['id']) &&
         $_POST['id'] == $game_id
     ) {
-        $stmt = $pdo->prepare("UPDATE games SET title = ?, genre = ?, platform = ?, release_year = ?, rating = ?, beschrijving = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE games SET title = ?, genre = ?, platform = ?, release_year = ?, rating = ?, description = ? WHERE id = ?");
         $stmt->execute([
             $_POST['title'],
             $_POST['genre'],
             $_POST['platform'],
             $_POST['release_year'],
             $_POST['rating'],
-            $_POST['beschrijving'],
+            $_POST['description'],
             $game_id,
         ]);
 
@@ -66,7 +66,7 @@
     <title><?php echo $game['title']; ?></title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <meta name="beschrijving" content="<?php echo isset($game['beschrijving']) ? htmlspecialchars($game['beschrijving']) : ''; ?>">
+    <meta name="description" content="<?php echo isset($game['description']) ? htmlspecialchars($game['description']) : ''; ?>">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
 </head>
@@ -77,9 +77,9 @@
     <h1><?php echo htmlspecialchars($game['title']); ?></h1>
     <p><strong>Genre:</strong> <?php echo htmlspecialchars($game['genre']); ?></p>
     <p><strong>Platform:</strong> <?php echo htmlspecialchars($game['platform']); ?></p>
-    <p><strong>Release Jaar:</strong> <?php echo htmlspecialchars($game['release_year'] ?? 'Onbekend'); ?></p>
-    <p><strong>Rating:</strong> <?php echo htmlspecialchars($game['rating'] ?? 'Onbekend'); ?></p>
-    <p><strong>Beschrijving:</strong> <?php echo htmlspecialchars($game['beschrijving'] ?? 'Geen beschrijving beschikbaar.'); ?></p>
+    <p><strong>Release year:</strong> <?php echo htmlspecialchars($game['release_year'] ?? 'Unkno'); ?></p>
+    <p><strong>Rating:</strong> <?php echo htmlspecialchars($game['rating'] ?? 'Unknown'); ?></p>
+    <p><strong>Description:</strong> <?php echo htmlspecialchars($game['description'] ?? 'No description available.'); ?></p>
     <?php if (!empty($game['cover_image'])): ?>
         <img src="<?php echo htmlspecialchars($game['cover_image']); ?>" alt="Cover Image" style="max-width:200px;">
     <?php endif; ?>
@@ -91,8 +91,8 @@
     <br>
 
     <div class="returntoindex">
-    <!-- return to overview link -->
-    <a href="index.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">return to index</a>
+        <!-- return to overview link -->
+        <a href="index.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">return to index</a>
     </div>
 
 </form>

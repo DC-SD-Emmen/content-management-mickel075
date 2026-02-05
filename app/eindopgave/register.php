@@ -1,6 +1,10 @@
 <?php
 
-    $session_start();
+    require_once 'classes/Database.php';
+    require_once 'classes/User.php';
+    require_once 'classes/UserManager.php';
+
+    session_start();
 
     $_SESSION['user_id'] = $userID;
     $_SESSION['username'] = $userName;

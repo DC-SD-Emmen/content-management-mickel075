@@ -13,6 +13,46 @@ body {
   margin-top: 30px;
 }
 
+.top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.button-register {
+  align-content: center;
+  padding: 10px 15px;
+  background: #1b6ca8;
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.button-register:hover {
+  background: #2389d7;
+}
+
+.button-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background: #1b6ca8;
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.button-login:hover {
+  background: #2389d7;
+}
+
 .card {
   background: #323232;
   padding: 15px;
@@ -151,8 +191,6 @@ button   {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.2s ease;
-  height: fit-content;
-  width: fit-content; 
 }
 
 .error {

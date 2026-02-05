@@ -35,3 +35,5 @@ class User {
         $this->userEmail = $userEmail;
     }
 }
+
+?>

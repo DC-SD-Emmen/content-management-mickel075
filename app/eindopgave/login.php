@@ -72,6 +72,8 @@
         <input type="password" id="Password" name="Password" required><br><br>
 
         <button type="submit">Login</button>
+        <button type="button" onclick="window.location.href='register.php'">Register</button>
+        <button type="button" onclick="window.location.href='index.php'">Back to Homepage</button>
 
     </form>
     

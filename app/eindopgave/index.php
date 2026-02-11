@@ -45,6 +45,14 @@
 
             </div>
 
+            <br>
+
+            <div class="button-logout">
+
+                <button type="button" onclick="location.href='logout.php'">Logout</button>
+
+            </div>
+
         </div>
         
         <div class="header">

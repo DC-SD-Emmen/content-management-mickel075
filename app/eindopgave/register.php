@@ -57,6 +57,8 @@
     <h1>Registration Successful!</h1>
     <p>Welcome, <?= htmlspecialchars($userName ?? '') ?>! Your registration was successful.</p>
     <a href="index.php">Go to Homepage</a>
+
+    
     
 </body>
 </html>

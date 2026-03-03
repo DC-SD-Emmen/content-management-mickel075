@@ -54,10 +54,27 @@
 </head>
 <body>
 
-    <h1>Registration Successful!</h1>
-    <p>Welcome, <?= htmlspecialchars($userName ?? '') ?>! Your registration was successful.</p>
-    <a href="index.php">Go to Homepage</a>
+    <!-- <h1>Registration Successful!</h1>
+    <p>Welcome, <?= htmlspecialchars($userName ?? '') ?>! Your registration was successful.</p> -->
 
+
+    <form method="POST" action="register.php">
+
+        <h1>Register</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Register</button>
+        <button type="button" onclick="window.location.href='login.php'">Go to Login</button>
+        <button type="button" onclick="window.location.href='index.php'">Go to Home</button>
+
+    </form>
     
     
 </body>

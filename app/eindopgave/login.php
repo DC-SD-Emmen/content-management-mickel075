@@ -12,6 +12,9 @@
     // Include database connection
     require_once 'classes/Database.php';
 
+    // Initialize error variable
+    $error = null;
+
     // Check if form is submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['Email'];
@@ -25,13 +28,13 @@
         $stmt = $db->prepare("SELECT id, username, password FROM users WHERE email = ?");
         if ($stmt === false) {
             $error = "Database error. Please try again later.";
-        } elseif ($stmt->execute([$email])) {
+        } else if ($stmt->execute([$email])) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
             $user = null;
         }
 
-        if ($user && password_verify($password, $user['password'])) {
+        if (!$error && $user && password_verify($password, $user['password'])) {
             // Set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];

@@ -3,15 +3,18 @@
     // Start session
     session_start();
 
-    // Unset all session variables
-    $_SESSION = array();
+    // Check if logout form was submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Unset all session variables
+        $_SESSION = array();
 
-    // Destroy the session
-    session_destroy();
+        // Destroy the session
+        session_destroy();
 
-    // Redirect to homepage or login page after logout
-    header("Location: index.php");
-    exit();
+        // Redirect to homepage or login page after logout
+        header("Location: index.php");
+        exit();
+    }
 
 ?>
 
@@ -24,8 +27,10 @@
 </head>
 <body>
     
-    <h1>You have been logged out.</h1>
-    <a href="index.php">Go to Homepage</a>
+    <form action="logout.php" method="post">
+        <button type="submit">Log Out</button>
+        <button type="button" onclick="window.location.href='index.php'">Cancel</button>
+    </form>
 
 </body>
 </html>

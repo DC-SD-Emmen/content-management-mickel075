@@ -67,6 +67,10 @@ body {
   transition: background 0.2s ease;
 }
 
+.button-logout:hover {
+  background: #2389d7;
+}
+
 .card {
   background: #323232;
   padding: 15px;

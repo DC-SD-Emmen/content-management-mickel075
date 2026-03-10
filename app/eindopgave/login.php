@@ -25,7 +25,7 @@
         $db = $database->getConnection();
 
         // Prepare and execute query to check user credentials
-        $stmt = $db->prepare("SELECT id, username, password FROM users WHERE email = ?");
+        $stmt = $db->prepare("SELECT id, userName, userPassword FROM users WHERE userEmail = ?");
         if ($stmt === false) {
             $error = "Database error. Please try again later.";
         } else if ($stmt->execute([$email])) {
@@ -34,10 +34,10 @@
             $user = null;
         }
 
-        if (!$error && $user && password_verify($password, $user['password'])) {
+        if (!$error && $user && password_verify($password, $user['userPassword'])) {
             // Set session variables
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['username'] = $user['userName'];
             $_SESSION['email'] = $email;
 
             // Redirect to homepage or dashboard after login

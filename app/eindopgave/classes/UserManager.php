@@ -84,4 +84,11 @@
             }
         }
 
+
+        //addToWishlist function that adds a game to the user's wishlist
+        public function addToWishlist($userID, $gameID) {
+        }
+
     }
+
+?>

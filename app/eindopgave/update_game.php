@@ -64,7 +64,7 @@
     <label for="platform">Platform:</label><br>
     <input type="text" name="platform" id="platform" value="<?php echo htmlspecialchars($game->getPlatform()); ?>" required><br><br>
     <label for="release_year">Release Year:</label><br>
-    <input type="number" name="release_year" id="release_year" min="1970" max="<?php echo date("Y") + 1; ?>" value="<?php echo htmlspecialchars($game->getReleaseYear()); ?>" required><br><br>
+    <input type="date" name="release_year" id="release_year" value="<?php echo htmlspecialchars($game->getReleaseYear()); ?>" required><br><br>
     <label for="rating">Rating:</label><br>
     <input type="number" name="rating" id="rating" min="1" max="10" value="<?php echo htmlspecialchars($game->getRating()); ?>" required><br><br>
     <label for="description">Description:</label><br>
@@ -72,7 +72,7 @@
     <button type="submit" name="update">Update Game</button>
 
     <div class="anuleer">
-        <a href="index.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">cancel</a>
+        <a href="index.php" class="btn">cancel</a>
     </div>
 
 </form>

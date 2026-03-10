@@ -19,8 +19,8 @@ body {
   right: 20px;
 }
 
-.button-register {
-  align-content: center;
+.button-login button{
+  margin-left: 20px;
   padding: 10px 15px;
   background: #1b6ca8;
   font-size: 15px;
@@ -31,14 +31,12 @@ body {
   transition: background 0.2s ease;
 }
 
-.button-register:hover {
+.button-login button:hover {
   background: #2389d7;
 }
 
-.button-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.button-register button{
+  margin-left: 20px;
   padding: 10px 15px;
   background: #1b6ca8;
   font-size: 15px;
@@ -49,26 +47,17 @@ body {
   transition: background 0.2s ease;
 }
 
-.button-login:hover {
+.button-register button:hover {
   background: #2389d7;
 }
 
-.button-logout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 15px;
-  background: #1b6ca8;
-  font-size: 15px;
+.button-logout button {
+  background-color: #d9534f; /* Rood voor logout */
   color: white;
-  border: none;
+  padding: 10px 15px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.button-logout:hover {
-  background: #2389d7;
+  font-size: 15px;
+  border: none;
 }
 
 .card {

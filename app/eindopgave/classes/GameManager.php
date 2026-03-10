@@ -26,6 +26,20 @@ class GameManager {
         return $games;
     }
 
+    public function GetWishlistGames(int $user_id): array {
+        //table for users is named users
+        //table for games is named games
+        //table for wishlist is named users_games
+        $stmt = $this->conn->prepare("SELECT g.* FROM games g JOIN users_games ug ON g.id = ug.game_id WHERE ug.user_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        $rows = $stmt->fetchAll();
+        $games = [];
+        foreach ($rows as $r) {
+            $games[] = new Game($r['title'], $r['genre'], $r['platform'], $r['release_year'], $r['rating'], $r['beschrijving'], $r['image_name'], $r['id']);
+        }
+        return $games;
+    }
+
     /**
      * Haal één game op op basis van id
      */
@@ -81,8 +95,19 @@ public function addGame(Game $game): int {
      * Verwijder game
      */
     public function deleteGame(int $id): bool {
-        $stmt = $this->conn->prepare("DELETE FROM games WHERE id = :id");
-        return $stmt->execute(['id' => $id]);
+        try {
+        // 1. Verwijder eerst de koppelingen in de tussentabel
+        $stmt1 = $this->conn->prepare("DELETE FROM users_games WHERE game_id = ?");
+        $stmt1->execute([$id]);
+
+        // 2. Verwijder daarna pas de game zelf
+        $stmt2 = $this->conn->prepare("DELETE FROM games WHERE id = ?");
+        $stmt2->execute([$id]);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function file_upload($file) {
@@ -114,7 +139,7 @@ public function addGame(Game $game): int {
 
         // Allow certain file formats
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
+            && $imageFileType != "gif" && $imageFileType != "webp" ) {
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadOk = 0;
         }

@@ -77,7 +77,7 @@
     <h1><?php echo htmlspecialchars($game['title']); ?></h1>
     <p><strong>Genre:</strong> <?php echo htmlspecialchars($game['genre']); ?></p>
     <p><strong>Platform:</strong> <?php echo htmlspecialchars($game['platform']); ?></p>
-    <p><strong>Release year:</strong> <?php echo htmlspecialchars($game['release_year'] ?? 'Unkno'); ?></p>
+    <p><strong>Release year:</strong> <?php echo htmlspecialchars($game['release_year'] ?? 'Unknown'); ?></p>
     <p><strong>Rating:</strong> <?php echo htmlspecialchars($game['rating'] ?? 'Unknown'); ?></p>
     <p><strong>Description:</strong> <?php echo htmlspecialchars($game['description'] ?? 'No description available.'); ?></p>
     <?php if (!empty($game['cover_image'])): ?>
@@ -93,6 +93,10 @@
     <div class="returntoindex">
         <!-- return to overview link -->
         <a href="index.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">return to index</a>
+        <!-- Update game button -->
+        <a href="update_game.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">update game</a>
+        <!-- add to wishlist button -->
+        <a href="wishlist.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">add to wishlist</a>
     </div>
 
 </form>

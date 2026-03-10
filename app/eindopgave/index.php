@@ -1,5 +1,8 @@
 <?php
 
+    // Start session
+    session_start();
+
     //autoloader classes
     spl_autoload_register(function ($class_name) {
         include 'classes/' . $class_name . '.php';
@@ -30,28 +33,20 @@
 
         <div class="top-right">
 
-            <div class="button-register">
-
-                <!-- Register and Login buttons -->
-                <button type="button" onclick="location.href='register.php'">Register</button>
-
-            </div>
-
-            <br>
-                
-            <div class="button-login">
-
-                <button type="button" onclick="location.href='login.php'">Login</button>
-
-            </div>
-
-            <br>
-
-            <div class="button-logout">
-
-                <button type="button" onclick="location.href='logout.php'">Logout</button>
-
-            </div>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <p id="welcome-message">Welkom, <?= htmlspecialchars($_SESSION['username'] ?? 'Gebruiker') ?>!</p>
+                <div class="button-logout">
+                    <button type="button" onclick="location.href='logout.php'">Logout</button>
+                </div>
+            <?php else: ?>
+                <div class="button-register">
+                    <button type="button" onclick="location.href='register.php'">Register</button>
+                </div>
+                <br>
+                <div class="button-login">
+                    <button type="button" onclick="location.href='login.php'">Login</button>
+                </div>
+            <?php endif; ?>
 
         </div>
         
@@ -85,6 +80,24 @@
         </div>
 
     </div>
+    
+    <script>
+    // Wacht tot de pagina geladen is
+    window.onload = function() {
+        const message = document.getElementById('welcome-message');
+        if (message) {
+            // Wacht 2000 milliseconden (2 seconden)
+            setTimeout(function() {
+                // Maak de boodschap onzichtbaar met een mooie fade-out
+                message.style.transition = "opacity 0.5s ease";
+                message.style.opacity = "0";
+                
+                // Verwijder het element volledig na de fade
+                setTimeout(() => message.remove(), 500);
+            }, 2000);
+        }
+    };
+    </script>
     
 </body>
 </html>

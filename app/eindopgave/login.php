@@ -26,13 +26,6 @@
 
         // Prepare and execute query to check user credentials
         $stmt = $db->prepare("SELECT id, userName, userPassword FROM users WHERE userEmail = ?");
-        if ($stmt === false) {
-            $error = "Database error. Please try again later.";
-        } else if ($stmt->execute([$email])) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        } else {
-            $user = null;
-        }
 
         if (!$error && $user && password_verify($password, $user['userPassword'])) {
             // Set session variables

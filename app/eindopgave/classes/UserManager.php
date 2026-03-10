@@ -16,7 +16,7 @@
         //user try and catch for error handling
         public function addUser($userName, $userEmail, $userPassword) {
             try {
-                $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+                $stmt = $this->conn->prepare("INSERT INTO users (userName, userEmail, userPassword) VALUES (:username, :email, :password)");
                 $stmt->execute([
                     ':username' => $userName,
                     ':email' => $userEmail,

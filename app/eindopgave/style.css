@@ -51,6 +51,16 @@ body {
   background: #2389d7;
 }
 
+.register body{
+  background: #323232;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: fit-content;
+  margin: 50px auto;
+}
+
 .button-logout button {
   background-color: #d9534f; /* Rood voor logout */
   color: white;

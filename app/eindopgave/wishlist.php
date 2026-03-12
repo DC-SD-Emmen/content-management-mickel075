@@ -1,21 +1,29 @@
 <?php
 
-    //require wishlist_game.php
-    require_once 'wishlist_game.php';
+    // // 1. ALTIJD als eerste de sessie starten!
+    // session_start();
 
-    //autoloader classes
+    // require wishlist_game.php
+    require 'wishlist_game.php';
+
+    // autoloader classes
     spl_autoload_register(function ($class_name) {
         include 'classes/' . $class_name . '.php';
     });
 
-    //create database object
-    $database = new Database();
+    // 2. Controleer of de sessie wel gevuld is
+    if (!isset($_SESSION['user_id'])) {
+        // Gebruiker is niet ingelogd, stuur ze naar de loginpagina
+        header("Location: login.php");
+        exit();
+    }
 
+    // create database object
+    $database = new Database();
     $gm = new GameManager($database->getConnection());
 
-    // $games = $gm->getAllGames();
-
-    $games = $gm->GetWishlistGames($_SESSION['user_id']);
+    // Nu is het veilig om de ID te gebruiken
+    $games = $gm->GetWishlistGames((int)$_SESSION['user_id']);
 
 ?>
 

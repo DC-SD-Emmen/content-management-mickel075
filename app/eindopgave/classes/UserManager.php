@@ -87,6 +87,24 @@
 
         //addToWishlist function that adds a game to the user's wishlist
         public function addToWishlist($userID, $gameID) {
+            try {
+            $stmt = $this->conn->prepare("INSERT INTO wishlist (userID, gameID) VALUES (:userID, :gameID)");
+            $stmt->execute([
+                ':userID' => $userID,
+                ':gameID' => $gameID
+            ]);
+            return true;
+            } catch (PDOException $e) {
+            // Handle error (e.g., log it)
+            return false;
+            }
+        }
+
+        //getWishlist function that gets all games from the user's wishlist
+        public function getWishlist($user_id): array {
+            $stmt = $this->conn->prepare("SELECT g.* FROM games g JOIN wishlist w ON g.id = w.gameID WHERE w.userID = :user_id");
+            $stmt->execute(['user_id' => $user_id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
     }

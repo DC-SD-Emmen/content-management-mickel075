@@ -1,28 +1,47 @@
 <?php
 
-    // // 1. ALTIJD als eerste de sessie starten!
-    // session_start();
+    // // // 1. ALTIJD als eerste de sessie starten!
+    // // session_start();
 
-    // require wishlist_game.php
-    require 'wishlist_game.php';
+    // // require wishlist_game.php
+    // require 'wishlist_game.php';
 
-    // autoloader classes
+    // // autoloader classes
+    // spl_autoload_register(function ($class_name) {
+    //     include 'classes/' . $class_name . '.php';
+    // });
+
+    // // 2. Controleer of de sessie wel gevuld is
+    // if (!isset($_SESSION['user_id'])) {
+    //     // Gebruiker is niet ingelogd, stuur ze naar de loginpagina
+    //     header("Location: login.php");
+    //     exit();
+    // }
+
+    // // create database object
+    // $database = new Database();
+    // $gm = new GameManager($database->getConnection());
+
+    // // Nu is het veilig om de ID te gebruiken
+    // $games = $gm->GetWishlistGames((int)$_SESSION['user_id']);
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Haal de require 'wishlist_game.php' hier weg!
+
     spl_autoload_register(function ($class_name) {
         include 'classes/' . $class_name . '.php';
     });
 
-    // 2. Controleer of de sessie wel gevuld is
     if (!isset($_SESSION['user_id'])) {
-        // Gebruiker is niet ingelogd, stuur ze naar de loginpagina
         header("Location: login.php");
         exit();
     }
 
-    // create database object
     $database = new Database();
     $gm = new GameManager($database->getConnection());
-
-    // Nu is het veilig om de ID te gebruiken
     $games = $gm->GetWishlistGames((int)$_SESSION['user_id']);
 
 ?>
@@ -49,8 +68,10 @@
                     <div class="actions">
                         <a href="game_details.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">See details</a>
                         <a href="update_game.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">Update game</a>
-                        <a href="del_game.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn delete"
-                        onclick="return confirm('Are you sure you want to delete this game?');">delete</a>
+                        <a href="del_from_wishlist.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn delete"
+                            onclick="return confirm('Weet je zeker dat je deze game uit JE WISHLIST wilt verwijderen?');">
+                            remove from wishlist
+                        </a>
                     </div>
 
                 </div>

@@ -26,7 +26,7 @@
     if (
         $_SERVER['REQUEST_METHOD'] === 'POST' &&
         isset($_POST['action']) && $_POST['action'] === 'update' &&
-        isset($_POST['title'], $_POST['genre'], $_POST['platform'], $_POST['release_year'], $_POST['rating'], $_POST['description   '], $_POST['id']) &&
+        isset($_POST['title'], $_POST['genre'], $_POST['platform'], $_POST['release_year'], $_POST['rating'], $_POST['description'], $_POST['id']) &&
         $_POST['id'] == $game_id
     ) {
         $stmt = $pdo->prepare("UPDATE games SET title = ?, genre = ?, platform = ?, release_year = ?, rating = ?, description = ? WHERE id = ?");
@@ -96,7 +96,8 @@
         <!-- Update game button -->
         <a href="update_game.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">update game</a>
         <!-- add to wishlist button -->
-        <a href="wishlist.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">add to wishlist</a>
+        <!-- <a href="wishlist.php?id=<?= htmlspecialchars($game['id']) ?>" class="btn">add to wishlist</a> -->
+        <a href="wishlist_game.php?id=<?= $game['id'] ?>" class="btn">add to wishlist</a>
     </div>
 
 </form>

@@ -69,10 +69,13 @@
     <input type="number" name="rating" id="rating" min="1" max="10" value="<?php echo htmlspecialchars($game->getRating()); ?>" required><br><br>
     <label for="description">Description:</label><br>
     <textarea name="description" id="description" required><?php echo htmlspecialchars($game && method_exists($game, 'getDescription') ? $game->getDescription() : ''); ?></textarea><br><br>
-    <button type="submit" name="update">Update Game</button>
+
+    <div class="update">
+        <button type="submit" name="update">Update Game</button>
+    </div>
 
     <div class="anuleer">
-        <a href="index.php" class="btn">cancel</a>
+        <button type="button" onclick="window.location.href='index.php'" class="btn">cancel</button>
     </div>
 
 </form>

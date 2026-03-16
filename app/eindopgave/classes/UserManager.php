@@ -85,27 +85,64 @@
         }
 
 
-        //addToWishlist function that adds a game to the user's wishlist
-        public function addToWishlist($userID, $gameID) {
-            try {
-            $stmt = $this->conn->prepare("INSERT INTO wishlist (userID, gameID) VALUES (:userID, :gameID)");
+        // //addToWishlist function that adds a game to the user's wishlist
+        // public function addToWishlist($userID, $gameID) {
+        //     try {
+        //     $stmt = $this->conn->prepare("INSERT INTO wishlist (userID, gameID) VALUES (:userID, :gameID)");
+        //     $stmt->execute([
+        //         ':userID' => $userID,
+        //         ':gameID' => $gameID
+        //     ]);
+        //     return true;
+        //     } catch (PDOException $e) {
+        //     // Handle error (e.g., log it)
+        //     return false;
+        //     }
+        // }
+
+        // //getWishlist function that gets all games from the user's wishlist
+        // public function getWishlist($user_id): array {
+        //     $stmt = $this->conn->prepare("SELECT g.* FROM games g JOIN wishlist w ON g.id = w.gameID WHERE w.userID = :user_id");
+        //     $stmt->execute(['user_id' => $user_id]);
+        //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // }
+
+        // addToWishlist function die de juiste tabelnaam en kolommen gebruikt
+    public function addToWishlist($userID, $gameID) {
+        try {
+            // Gebruik de namen uit je screenshot: users_games, user_id, game_id
+            $stmt = $this->conn->prepare("INSERT IGNORE INTO users_games (user_id, game_id) VALUES (:userID, :gameID)");
             $stmt->execute([
                 ':userID' => $userID,
                 ':gameID' => $gameID
             ]);
             return true;
-            } catch (PDOException $e) {
-            // Handle error (e.g., log it)
+        } catch (PDOException $e) {
+            // Log eventueel de error: error_log($e->getMessage());
             return false;
-            }
         }
+    }
 
-        //getWishlist function that gets all games from the user's wishlist
-        public function getWishlist($user_id): array {
-            $stmt = $this->conn->prepare("SELECT g.* FROM games g JOIN wishlist w ON g.id = w.gameID WHERE w.userID = :user_id");
-            $stmt->execute(['user_id' => $user_id]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
+    // removeFromWishlist function die de juiste tabelnaam en kolommen gebruikt
+    public function removeFromWishlist($userID, $gameID) {
+        try {
+            $stmt = $this->conn->prepare("DELETE FROM users_games WHERE user_id = :userID AND game_id = :gameID");
+            $stmt->execute([
+                ':userID' => $userID,
+                ':gameID' => $gameID
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }   
+    }
+
+    // getWishlist function (indien je deze gebruikt in plaats van de GameManager versie)
+    public function getWishlist($user_id): array {
+        $stmt = $this->conn->prepare("SELECT g.* FROM games g JOIN users_games ug ON g.id = ug.game_id WHERE ug.user_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     }
 

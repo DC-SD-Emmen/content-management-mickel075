@@ -135,6 +135,18 @@ body {
   transition: background 0.2s ease;
 }
 
+.update {
+  margin-left: 20px;
+  width: fit-content;
+  padding: 10px 15px;
+  background: #1b6ca8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
 .anuleer {
   margin-left: 20px;
   width: fit-content;

@@ -38,6 +38,10 @@
                 <div class="button-logout">
                     <button type="button" onclick="location.href='logout.php'">Logout</button>
                 </div>
+                <br>
+                <div class="button-wishlist">
+                    <button type="button" onclick="location.href='wishlist.php'">Wishlist</button>
+                </div>
             <?php else: ?>
                 <div class="button-register">
                     <button type="button" onclick="location.href='register.php'">Register</button>

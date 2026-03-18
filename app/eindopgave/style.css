@@ -19,21 +19,6 @@ body {
   right: 20px;
 }
 
-.btn-wishlist {
-  background-color: #1b6ca8;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background 0.2s ease;
-}
-
-.btn-wishlist:hover {
-  background-color: #2389d7;
-}
-
 .button-login button{
   margin-left: 20px;
   padding: 10px 15px;
@@ -87,6 +72,19 @@ body {
 
 .button-logout button:hover {
   background-color: #d72626; /* Felrood voor hover */
+}
+
+.button-wishlist button {
+  background-color: #1b6ca8; /* Blauw voor wishlist */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  border: none;
+}
+
+.button-wishlist button:hover {
+  background-color: #2389d7;
 }
 
 .card {

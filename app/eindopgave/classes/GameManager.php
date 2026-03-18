@@ -96,13 +96,25 @@ public function addGame(Game $game): int {
      */
     public function deleteGame(int $id): bool {
         try {
-        // 1. Verwijder eerst de koppelingen in de tussentabel
-        $stmt1 = $this->conn->prepare("DELETE FROM users_games WHERE game_id = ?");
-        $stmt1->execute([$id]);
+            // 0. Ophalen van afbeelding naam (indien aanwezig)
+            $stmt0 = $this->conn->prepare("SELECT image_name FROM games WHERE id = ?");
+            $stmt0->execute([$id]);
+            $row = $stmt0->fetch();
 
-        // 2. Verwijder daarna pas de game zelf
-        $stmt2 = $this->conn->prepare("DELETE FROM games WHERE id = ?");
-        $stmt2->execute([$id]);
+            if ($row && !empty($row['image_name'])) {
+                $imagePath = dirname(__DIR__) . '/images/' . $row['image_name'];
+                if (is_file($imagePath) && file_exists($imagePath)) {
+                    @unlink($imagePath);
+                }
+            }
+
+            // 1. Verwijder eerst de koppelingen in de tussentabel
+            $stmt1 = $this->conn->prepare("DELETE FROM users_games WHERE game_id = ?");
+            $stmt1->execute([$id]);
+
+            // 2. Verwijder daarna pas de game zelf
+            $stmt2 = $this->conn->prepare("DELETE FROM games WHERE id = ?");
+            $stmt2->execute([$id]);
 
             return true;
         } catch (PDOException $e) {

@@ -50,35 +50,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
 
-        <!-- Nieuwe wrapper voor je grid -->
-        <div class="library">
+        <div class="header">
+        <h1>Wishlist</h1>
+        <button type="button" onclick="location.href='index.php'">Back to library</button>
+    </div>
 
-            <!-- Hier komen je cards -->
-            <?php foreach ($games as $game): ?>
+    <!-- Nieuwe wrapper voor je grid -->
+    <div class="library">
 
-                <div class="card">
-                    <img src="./images/<?= htmlspecialchars($game->getImageName()) ?>" alt="Cover of <?= htmlspecialchars($game->getTitle()) ?>" class="cover-image">
+        <!-- Hier komen je cards -->
+        <?php foreach ($games as $game): ?>
 
-                    <div class="actions">
-                        <a href="game_details.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">See details</a>
-                        <a href="update_game.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">Update game</a>
-                        <a href="del_from_wishlist.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn delete"
-                            onclick="return confirm('Weet je zeker dat je deze game uit JE WISHLIST wilt verwijderen?');">
-                            remove from wishlist
-                        </a>
-                    </div>
+            <div class="card">
+                <img src="./images/<?= htmlspecialchars($game->getImageName()) ?>" alt="Cover of <?= htmlspecialchars($game->getTitle()) ?>" class="cover-image">
 
+                <div class="actions">
+                    <a href="game_details.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">See details</a>
+                    <a href="update_game.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn">Update game</a>
+                    <a href="del_from_wishlist.php?id=<?= htmlspecialchars($game->getId()) ?>" class="btn delete"
+                        onclick="return confirm('Weet je zeker dat je deze game uit JE WISHLIST wilt verwijderen?');">
+                        remove from wishlist
+                    </a>
                 </div>
 
-            <?php endforeach; ?>
+            </div>
 
-        </div>
-    
+        <?php endforeach; ?>
+
+    </div>
+
 </body>
 </html>

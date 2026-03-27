@@ -25,13 +25,26 @@
     
     if (isset($_POST['update'])) {
     $gameId = $_POST['id'];
+    $image_name = $game->getImageName();
+
+    echo "DEBUG: Original image_name: " . $image_name . "<br>";
+    echo "DEBUG: FILES: " . print_r($_FILES, true) . "<br>";
+
+    if (!empty($_FILES['cover_image']['name'])) {
+        if ($gameManager->file_upload($_FILES['cover_image'])) {
+            $image_name = $_FILES['cover_image']['name'];
+            echo "DEBUG: New image_name: " . $image_name . "<br>";
+        }
+    }
+
     $game = new Game(
         $_POST['title'],
         $_POST['genre'],
         $_POST['platform'],
         $_POST['release_year'],
         $_POST['rating'],
-        $_POST['description']
+        $_POST['description'],
+        $image_name
     );
     $game->setId($gameId);
 
@@ -52,7 +65,7 @@
     <title>Update Game</title>
 </head>
 <body>
-<form method="post" action="update_game.php?id=<?php echo $game_id; ?>">
+<form method="post" action="update_game.php?id=<?php echo $game_id; ?>" enctype="multipart/form-data">
 
     <!-- Update form -->
     <h2>Update Game</h2>
@@ -69,6 +82,12 @@
     <input type="number" name="rating" id="rating" min="1" max="10" value="<?php echo htmlspecialchars($game->getRating()); ?>" required><br><br>
     <label for="description">Description:</label><br>
     <textarea name="description" id="description" required><?php echo htmlspecialchars($game && method_exists($game, 'getDescription') ? $game->getDescription() : ''); ?></textarea><br><br>
+
+    <label for="cover_image">Cover Image (leave empty to keep current):</label><br>
+    <?php if ($game->getImageName()): ?>
+        <img src="./images/<?= htmlspecialchars($game->getImageName()) ?>" alt="Current cover" style="max-width: 200px; margin-bottom: 10px;"><br>
+    <?php endif; ?>
+    <input type="file" name="cover_image" id="cover_image"><br><br>
 
     <div class="update">
         <button type="submit" name="update">Update Game</button>
